@@ -1,17 +1,16 @@
 #!/usr/bin/python3.6
 # -*- coding:utf-8 -*-
 
-import schedule
+import json
+import threading
 import time
 from subprocess import Popen
-import logging
-import threading
-from db import redis_connection
 
 import requests
-import redis
+import schedule
 from lxml import etree
-import json
+
+from db import redis_connection
 
 VIDEO_URL = "https://api.bilibili.com/x/article/archives?ids={aid}"
 VIDEO_KEY = "videoRedis:start_urls"

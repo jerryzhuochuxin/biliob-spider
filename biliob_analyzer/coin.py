@@ -1,5 +1,4 @@
 from db import db
-from db import db
 import datetime
 coll = db['video']  # 获得collection的句柄
 start_date = datetime.datetime(2018,11,22)

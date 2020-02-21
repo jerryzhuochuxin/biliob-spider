@@ -1,28 +1,24 @@
+#!/usr/bin/python3.6
+# -*- coding:utf-8 -*-
 
-import schedule
+import datetime
+import json
+import logging
 import threading
 from time import sleep
-import datetime
-from biliob_tracer.task import ProgressTask
+
 import requests
-import redis
+import schedule
 from lxml import etree
-import json
-import requests
-from db import redis_connection
-from db import db
-import logging
-
-from biliob_analyzer.author_rate_caculate import author_fans_rate_caculate
-
-from biliob_analyzer.video_rank import compute_video_rank_table
-from biliob_analyzer.author_rank import calculate_author_rank
-from biliob_tracer.task import ExistsTask
-
-from biliob_analyzer.video_rank import calculate_video_rank
-from biliob_analyzer.author_fans_watcher import FansWatcher
 
 from biliob_analyzer.add_keyword import KeywordAdder
+from biliob_analyzer.author_fans_watcher import FansWatcher
+from biliob_analyzer.author_rank import calculate_author_rank
+from biliob_analyzer.video_rank import compute_video_rank_table
+from biliob_tracer.task import ExistsTask
+from biliob_tracer.task import ProgressTask
+from db import db
+from db import redis_connection
 
 logging.basicConfig(level=logging.INFO,
                     format='[%(asctime)s] %(levelname)s @ %(name)s: %(message)s')
@@ -108,7 +104,7 @@ def crawlOnlineTopListData():
         t.current_value += 1
 
 
-def set_minute_level_author(mid: int):
+def set_minute_level_author(mid):
     db['minute_level_author'].update(
         {'mid': mid}, {'mid': mid, 'date': datetime.datetime.now(tz="CN")})
     pass
@@ -235,7 +231,6 @@ def run_threaded(job_func):
 
 
 def set_schedule():
-
     # schedule.every().day.at('01:00').do(run_threaded, update_author)
     schedule.every().day.at('07:00').do(run_threaded, update_video)
     schedule.every().day.at('12:00').do(run_threaded, FansWatcher().watchBigAuthor)

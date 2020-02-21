@@ -1,17 +1,16 @@
 # coding=utf-8
-import scrapy
-from scrapy.http import Request
-from biliob_spider.items import AuthorItem
-import time
+import datetime
 import json
 import logging
-from pymongo import MongoClient
-import datetime
+
+import redis
+from scrapy.http import Request
+from scrapy_redis.spiders import RedisSpider
+
+from biliob_spider.items import AuthorItem
+from biliob_tracer.task import SpiderTask
 from db import db
 from db import redis_connect_string
-from scrapy_redis.spiders import RedisSpider
-import redis
-from biliob_tracer.task import SpiderTask
 
 
 class AuthorUpdateWithRedis(RedisSpider):
