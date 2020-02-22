@@ -6,3 +6,6 @@ COPY . /biliob-spider
 COPY requirements.txt /biliob-spider
 RUN pip install -r /biliob-spider/requirements.txt -i https://pypi.douban.com/simple
 WORKDIR /biliob-spider
+
+CMD ["bash","start.sh"]
+
