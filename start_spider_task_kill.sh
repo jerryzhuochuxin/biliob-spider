@@ -1,5 +1,4 @@
 #!/bin/bash
-cd ..
 spiders=(authorRedis videoRedis bangumiAndDonghua authorAutoAdd videoAutoAdd site online)
 for var in ${spiders[@]}
 do
