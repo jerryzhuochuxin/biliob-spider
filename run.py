@@ -94,7 +94,7 @@ def strong():
 
 
 def data_analyze():
-    Popen(['python', 'run_analyzer.py'])
+    Popen(['python3', 'run_analyzer.py'])
 
 
 # def weekly_analyze():
